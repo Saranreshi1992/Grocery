@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Page</title>
+    <link rel="stylesheet" href="location.css">
+    
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        
+        header{
+            position: static;
+            width: 100%;
+            height: 150px;
+            top: 0;
+            left: 0;
+            background-color: rgb(190, 244, 110);
+            font-size: 22px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        input[type=text]{
+            background-image:url('img/search1');
+            background-position:  right 20px center; 
+            background-repeat: no-repeat;
+            padding: 5px 20px 5px 20px;
+            width:250px;
+            height: 30px;
+            font-size: 18px;
+        }
+        
+        #title-container{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 50px;
+            margin-left: 150px;
+        }
+        
+        #title-container>div{
+            width: 600px;
+            height: 300px;
+        }
+        
+        #banner{
+            margin: 100px;
+            margin-top: 150px;
+            position: relative;
+            display: inline-block;
+            width: 90%;
+        }
+        
+        .overlay-text {
+            position: absolute;
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: -1px 0 40px rgba(0,0,0,0.8), 0 1px 40px rgba(0,0,0,0.8), 1px 0 40px rgba(0,0,0,0.8), 0 -1px 40px rgba(0,0,0,0.8); /* optional for readability */
+        }
+        
+        #category-container{
+            margin: 30px;
+            margin-left: 100px;
+        }
+        
+        #review-container{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: space-between;
+            align-content: center;
+            margin: 20px;
+            margin-left: 250px;
+        }
+        
+        #review-card1,#review-card2{
+            border: 5px solid rgb(122, 197, 11);
+            width: 550px;
+            height: 200px;
+            font-size: 20px;
+            padding: 20px;
+        }
+        
+        #grocery-footer{
+            position: static;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgb(190, 244, 110);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #footer-container{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        #media{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);            
+            align-items: center;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <header>
+        <div id="item1" style="cursor: default; display: flex;"><img src="img/grocerycart.jpg" width="70px" height="70px" style="border-radius: 50%;"> &nbsp;&nbsp;<h3>GroceryHub </h3></div>
+        <div id="item2">
+            <div id="card1" style="cursor: default;">Delivery in <span style="color: rgb(248, 15, 15);">7 Mins</span></div> 
+            <div id="card2" style="cursor: pointer; ">
+                <div class="dropdown" id="locationDropdown">
+                <div class="dropdown-toggle" onclick="toggleDropdown()" style="background-color: rgb(190, 244, 110); border: none;">Select location ▼</div>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item" onclick="useCurrentLocation()">📍 Use My Current Location</div>
+                    <div class="dropdown-item" onclick="enterManualLocation()">✏️ Enter Manually</div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div id="item3"><input type="text" id="searchBox" placeholder="Search"></div>
+        <div id="item4" style="cursor: pointer;" onclick="window.location.href='cart.html'"><img src="img/shopping-cart.png" width="20px" height="20px" > Cart</div>
+        <div id="item5" style="cursor: pointer;"onclick="window.location.href='wishlist.html'"><img src="img/heart.png" width="20px" height="20px" > Wishlist</div>
+        <div id="item6" style="cursor: pointer;" onclick="window.location.href='account.html'"><img src="img/account.png" width="20px" height="20px" > Account</div>
+        <div style="display: flex;"><img src="img/login.png" width="20px" height="20px" ><div id="authButton" style="cursor: pointer;" onclick="login()"> Login</div>
+    </header>
+    
+
+    <section id="title-container">
+        <div>
+            <p style="font-size: 46px; color: rgb(122, 197, 11);">Fresh Groceries Delivered To Your Doorstep</p>
+            <p style="font-size: 28px;">Emphasizing the Store's Commitment to providing fresh produce and Products Daily.</p>
+            <br><br>
+        </div>
+        <div >
+            <img src="img/groceryhub.jpg" style="width: 500px; height: 400px; border-radius: 50%;">
+        </div>
+    </section>
+
+    <section id="banner">
+        <img src="img/shop2.jpg" style="width: 100%; height: 300px; display: block;">
+        <div class="overlay-text">&nbsp;&nbsp;
+            <p>One Stop Shop For All Your Needs</p>
+            <p style="font-size: 24px;">Crafted with love from GroceryHub Team❤️</p>
+        </div>
+    </section>
+
+    <section id="category-container">
+        <h2>Shop By Category</h2>
+        <div id="item-container">
+            <img src="img/fruits.jpg" id="fruits" onclick="ctgfruits()" style="cursor: pointer;">
+            <img src="img/bread.jpg" id="bread" onclick="ctgbread()" style="cursor: pointer;">
+            <img src="img/atta.jpg" id="atta" onclick="ctgatta()" style="cursor: pointer;">
+            <img src="img/meat.jpg" id="meat" onclick="ctgmeat()" style="cursor: pointer;">
+            <img src="img/drinks.jpg" id="drinks" onclick="ctgdrinks()" style="cursor: pointer;">
+            <img src="img/cleaning.jpg" id="cleaning" onclick="ctgcleaning()" style="cursor: pointer;">
+        </div>
+    </section>
+
+    <br><br>
+
+    <section id="review">
+        <h2 style="text-align: center; margin: 20px; font-size: 28px;">What our Beloved Customers Say About Us</h2><br><br>
+        <div id="review-container">
+            <div id="review-card1">
+                <p style="text-align: center;" >⭐ ⭐ ⭐ ⭐</p>
+                <blockquote>" I've been shopping at this store for years and I'm always impressed with the quality of their produce and meats. "</blockquote>
+                <div><img src="img/preethi.jpg" width="50px" height="50px" style="border-radius: 50%;"> Preethi </div>
+            </div>
+            <div id="review-card2">
+                <p style="text-align: center;">⭐ ⭐ ⭐ ⭐ ⭐</p>
+                <blockquote>" I love the variety of products they carry, especially the organic and gluten-free options. The prices are reasonable too. "</blockquote>
+                <div><img src="img/Hrithik.jpg" width="50px" height="50px" style="border-radius: 50%;"> Hrithik </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="grocery-footer">
+        <div id="footer-container">
+            <div id="footer-card1">
+                <div style="display: flex;"><img src="img/grocerycart.jpg" width="70px" height="70px" style="border-radius: 50%;"> <h1>GroceryHub </h1></div>
+                <div id="media">
+                    <img src="img/whatsapp.png" width="40px" height="40px"> 
+                    <img src="img/facebook.png" width="40px" height="40px"> 
+                    <img src="img/instagram.png" width="40px" height="40px">
+                    <img src="img/twitter.png" width="40px" height="40px"> 
+                </div>
+            </div>
+            <div id="footer-card2" style="margin-left: 20px;">
+                <h4>Home</h4>
+                <h4>Delivery Areas</h4>
+                <h4>Careers</h4>
+                <h4>Customer Support</h4>
+                <h4>Press</h4>
+            </div>
+            <div id="footer-card3">
+                <h4>Privacy Policy</h4>
+                <h4>Terms of Use</h4>
+                <h4>Responsible Disclosure Policy</h4>
+                <h4>Sell on GroceryHub</h4>
+                <h4>Deliver with GroceryHub</h4>
+            </div>
+            <div id="footer-card4">
+                <h4>Download App</h4>
+                <button style="width: 250px; display: flex;"><img src="img/google-play.png" width="40px" height="40px">&nbsp;&nbsp;  <h3>Get it on Google Play</h3> </button>
+                <br>
+                <button style="width: 250px; display: flex;"><img src="img/applestore.png" width="40px" height="40px">&nbsp;&nbsp;  <h3>Get it on App Store</h3> </button>
+            </div>            
+        </div>
+        <p style="font-size: 20px; text-align: center;">&copy; GroceryHub India | All Rights Reserved</p>
+    </footer>
+
+    <script src="location.js"></script>
+    <script src="login.js"></script>
+    <script src="search.js"></script>
+    <script>
+        
+        function ctgfruits(){
+            window.location.href="fruits.html"
+        }
+        
+        function ctgbread(){
+            window.location.href="bread.html"
+        }
+        
+        function ctgdrinks(){
+            window.location.href="drinks.html"
+        }
+        
+        function ctgatta(){
+            window.location.href="atta.html"
+        }
+        
+        function ctgmeat(){
+            window.location.href="meat.html"
+        }
+        
+        function ctgcleaning(){
+            window.location.href="cleaning.html"
+        }
+
+        function checkLoginAndRedirect() {
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+            if (!isLoggedIn) {
+            alert("Please login to perform this action.");
+            window.location.href = "login.html";
+            return false;
+            }
+            return true;
+        }
+
+        function toggleDropdown() {
+            const menu = document.querySelector(".dropdown-menu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+        
+        function updateHeaderCounts() {
+            const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+
+            const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            const wishlistCount = wishlist.length;
+
+            const cartElem = document.getElementById("item4");
+            const wishlistElem = document.getElementById("item5");
+
+            cartElem.innerHTML = `<img src="img/shopping-cart.png" width="20px" height="20px"> Cart (${cartCount})`;
+            wishlistElem.innerHTML = `<img src="img/heart.png" width="20px" height="20px"> Wishlist (${wishlistCount})`;
+        }
+        
+        window.onload = updateHeaderCounts;
+        
+    </script>
+
+</body>
+</html>

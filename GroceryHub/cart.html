@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    
+    h1 { color: green; }
+    
+    .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+    }
+
+    .cart-item img { width: 60px; height: 60px; border-radius: 8px; }
+    
+    .btn { padding: 5px 10px; background-color: red; color: white; border: none; cursor: pointer; }
+    
+    .total { font-size: 22px; margin-top: 20px; }
+    
+    #paymentBtn { background-color: rgb(122, 197, 11); font-size: 22px; width: 250px; height: 40px; border-radius: 15px; margin-left: 800px; }
+  </style>
+</head>
+
+<body>
+  <h1>Your Cart</h1>
+  <div id="cartList"></div>
+  <p class="total">Total: ₹<span id="cartTotal">0</span></p>
+  <br><br>
+  <button id="paymentBtn" onclick="proceedToCheckout()" >Proceed to Payment</button>
+
+  <script>
+
+    function proceedToCheckout() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      if (cart.length === 0) {
+        alert("Your cart is empty. Please add items before proceeding.");
+        return; 
+      }
+      window.location.href = "checkout.html";
+    }
+
+    function renderCart() {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const cartList = document.getElementById("cartList");
+      const totalElem = document.getElementById("cartTotal");
+      cartList.innerHTML = "";
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <div>
+            <strong>${item.name} ( ${item.unit} )</strong><br>
+            ${item.qty}  × ₹${item.price} = ₹${item.price * item.qty}
+          </div>
+          <button class="btn" onclick="removeItem(${index})">Remove</button> 
+        `;
+        cartList.appendChild(div);
+      });
+
+      totalElem.textContent = total;
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    renderCart();
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Page</title>
+
+  <style>
+    body{
+      text-align: center;
+    }
+
+    h2{
+      font-size: 46px;
+    }
+
+    #accountInfo{
+      border: 3px solid black;
+      border-radius: 20px;
+      background-color: rgb(190, 244, 110);
+      font-size: 32px;
+      width: 700px;
+      height: 400px;
+      margin-top: 100px;
+      margin-left: 580px;
+      padding-top: 70px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Account Details</h2>
+  <div id="accountInfo"></div>
+
+  <script>
+
+    const username = localStorage.getItem("username");
+    const users = JSON.parse(localStorage.getItem("users") || '{}');
+    const container = document.getElementById("accountInfo");
+
+    if (username && users[username]) {
+      const user = users[username];
+      container.innerHTML = `
+        <p><strong>Username:</strong> ${username}</p>
+        <p><strong>Phone:</strong> ${user.phone}</p>
+        <p><strong>Address:</strong> ${user.address}</p>
+        <p><strong>Status:</strong> ${user.activated ? 'Activated' : 'Inactive'}</p>
+      `;
+    } else {
+      container.innerHTML = `<p>No account found. Please <a href="login.html">login</a>.</p>`;
+    }
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruits & Vegetables</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        
+        header{
+            position: fixed;
+            width: 100%;
+            height: 150px;
+            top: 0;
+            left: 0;
+            background-color: rgb(190, 244, 110);
+            font-size: 22px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        input[type=text]{
+            background-image:url('img/search1');
+            background-position:  right 20px center; 
+            background-repeat: no-repeat;
+            padding: 5px 20px 5px 20px;
+            width:250px;
+            height: 30px;
+            font-size: 18px;
+        }
+        
+        #grocery-footer{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgb(190, 244, 110);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #footer-container{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        #media{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);            
+            align-items: center;
+            margin-top: 25px;
+        }
+        
+        #product-container{
+            display: flex;
+            column-gap: 50px;
+            margin-left: 300px;
+            margin-top: 100px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 40%;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close-btn {
+            color: red;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="item1" style="cursor: default; display: flex;"><img src="img/grocerycart.jpg" width="70px" height="70px" style="border-radius: 50%;"> &nbsp;&nbsp;<h3>GroceryHub </h3></div>
+        <p id="card1" style="cursor: default;">Delivery in <span style="color: rgb(248, 15, 15);">7 Mins</span></p>
+        <div id="item3"><input type="text" id="searchBox" placeholder="Search"></div>
+        <div id="item4" style="cursor: pointer;" onclick="window.location.href='cart.html'"><img src="img/shopping-cart.png" width="20px" height="20px" > Cart</div>
+        <div id="item5" style="cursor: pointer;" onclick="window.location.href='wishlist.html'"><img src="img/heart.png" width="20px" height="20px" > Wishlist</div>
+    </header>
+
+    <section style="margin-top: 180px; margin-left: 300px;">
+        <h1 style="font-size: 30px;">Fruits & Vegetables</h1>
+    </section>
+
+    <section id="product-container">
+        <div id="prd-card1" style="cursor: pointer;"> <img src="img/apple.jpg" width="200px" height="200px"> </div>
+        <div id="prd-card2" style="cursor: pointer;"> <img src="img/banana.jpg" width="200px" height="200px"> </div>
+        <div id="prd-card3" style="cursor: pointer;"> <img src="img/onion.jpg" width="200px" height="200px"> </div>
+        <div id="prd-card4" style="cursor: pointer;"> <img src="img/Tomato.jpg" width="200px" height="200px"> </div>
+    </section>
+
+    <footer id="grocery-footer">
+        <div id="footer-container">
+            <div id="footer-card1">
+                <div style="display: flex;"><img src="img/grocerycart.jpg" width="70px" height="70px" style="border-radius: 50%;"> <h1>GroceryHub </h1></div>
+                <div id="media">
+                    <img src="img/whatsapp.png" width="40px" height="40px"> 
+                    <img src="img/facebook.png" width="40px" height="40px"> 
+                    <img src="img/instagram.png" width="40px" height="40px">
+                    <img src="img/twitter.png" width="40px" height="40px"> 
+                </div>
+            </div>
+            <div id="footer-card2" style="margin-left: 20px;">
+                <h4>Home</h4>
+                <h4>Delivery Areas</h4>
+                <h4>Careers</h4>
+                <h4>Customer Support</h4>
+                <h4>Press</h4>
+            </div>
+            <div id="footer-card3">
+                <h4>Privacy Policy</h4>
+                <h4>Terms of Use</h4>
+                <h4>Responsible Disclosure Policy</h4>
+                <h4>Sell on GroceryHub</h4>
+                <h4>Deliver with GroceryHub</h4>
+            </div>
+            <div id="footer-card4">
+                <h4>Download App</h4>
+                <button style="width: 250px; display: flex;"><img src="img/google-play.png" width="40px" height="40px">&nbsp;&nbsp;  <h3>Get it on Google Play</h3> </button>
+                <br>
+                <button style="width: 250px; display: flex;"><img src="img/applestore.png" width="40px" height="40px">&nbsp;&nbsp;  <h3>Get it on App Store</h3> </button>
+            </div>            
+        </div>
+        <p style="font-size: 20px; text-align: center;">&copy; GroceryHub India | All Rights Reserved</p>
+    </footer>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalProductName"></h2>
+            <img id="modalProductImg" src="" width="200" height="200">
+            <p id="modalProductPrice"></p>
+            <p>Unit: <span id="modalUnit"></span></p>
+            <div style="margin: 10px 0;">
+            Quantity:
+            <button onclick="changeQty(-1)">-</button>
+            <span id="quantity">1</span>
+            <button onclick="changeQty(1)">+</button>
+            </div>
+
+            <p>Total: ₹<span id="totalPrice">0</span></p>
+
+            <button id="wishlistBtn" onclick="toggleWishlist()">Add to Wishlist</button>
+            <button id="cartBtn" onclick="addToCart()">Add to Cart</button>
+        </div>
+    </div>
+
+    <script src="search.js"></script>
+    <script>
+
+        const products = {
+            prd1: { name: "Apple Royal Gala", price: 230, img: "img/apple.jpg", unit: "4 pcs" },
+            prd2: { name: "Banana Robusta", price: 60, img: "img/banana.jpg", unit: "450 gms" },
+            prd3: { name: "Onion", price: 60, img: "img/onion.jpg", unit: "1 Kg" },
+            prd4: { name: "Tomato", price: 25, img: "img/Tomato.jpg", unit: "500 gms" }
+        };
+
+        let selectedProduct = null;
+        let qty = 1;
+
+        function openModal(productKey) {
+            const modal = document.getElementById("productModal");
+            selectedProduct = products[productKey];
+            qty = 1;
+            document.getElementById("modalProductName").textContent = selectedProduct.name;
+            document.getElementById("modalProductImg").src = selectedProduct.img;
+            document.getElementById("modalProductPrice").textContent = "Price: ₹" + selectedProduct.price;
+            document.getElementById("modalUnit").textContent = selectedProduct.unit;
+            document.getElementById("quantity").textContent = qty;
+            document.getElementById("totalPrice").textContent = selectedProduct.price * qty;
+            const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+            const existsInWishlist = wishlist.some(p => p.name === selectedProduct.name);
+            document.getElementById("wishlistBtn").textContent =
+                existsInWishlist ? "Remove from Wishlist" : "Add to Wishlist";
+
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("productModal").style.display = "none";
+        }
+
+        function changeQty(change) {
+            qty = Math.max(1, qty + change);
+            document.getElementById("quantity").textContent = qty;
+            document.getElementById("totalPrice").textContent = selectedProduct.price * qty;
+        }
+
+        function toggleWishlist() {
+            if (!checkLoginAndRedirect()) return;
+            let wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+            const existingIndex = wishlist.findIndex(p => p.name === selectedProduct.name);
+            if (existingIndex !== -1) {
+                wishlist.splice(existingIndex, 1);
+                document.getElementById("wishlistBtn").textContent = "Add to Wishlist";
+                alert("Removed from wishlist");
+            } else {
+                wishlist.push({
+                name: selectedProduct.name,
+                price: selectedProduct.price,
+                unit: selectedProduct.unit
+                });
+                document.getElementById("wishlistBtn").textContent = "Remove from Wishlist";
+                alert("Added to wishlist");
+            }
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            updateHeaderCounts();
+        }
+
+        function addToCart() {
+            if (!checkLoginAndRedirect()) return;
+            let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const existing = cart.find(item => item.name === selectedProduct.name);
+
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({
+                name: selectedProduct.name,
+                price: selectedProduct.price,
+                unit: selectedProduct.unit,
+                qty: qty
+                });
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert("Product added to cart!");
+            updateHeaderCounts();
+        }
+
+        document.getElementById("prd-card1").onclick = () => openModal("prd1");
+        document.getElementById("prd-card2").onclick = () => openModal("prd2");
+        document.getElementById("prd-card3").onclick = () => openModal("prd3");
+        document.getElementById("prd-card4").onclick = () => openModal("prd4");
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("productModal");
+            if (event.target === modal) {
+            modal.style.display = "none";
+            }
+        };
+
+        function checkLoginAndRedirect() {
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+            if (!isLoggedIn) {
+            alert("Please login to perform this action.");
+            window.location.href = "login.html";
+            return false;
+            }
+            return true;
+        }
+
+        function updateHeaderCounts() {
+            const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+            const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+
+            const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            const wishlistCount = wishlist.length;
+
+            const cartElem = document.getElementById("item4");
+            const wishlistElem = document.getElementById("item5");
+
+            cartElem.innerHTML = `<img src="img/shopping-cart.png" width="20px" height="20px"> Cart (${cartCount})`;
+            wishlistElem.innerHTML = `<img src="img/heart.png" width="20px" height="20px"> Wishlist (${wishlistCount})`;
+        }
+
+        window.onload = function () {
+            updateHeaderCounts(); 
+
+            const searchData = JSON.parse(localStorage.getItem("searchProduct") || "null");
+            if ((searchData && searchData.name === "apple") || (searchData && searchData.name === "banana")
+                || (searchData && searchData.name === "onion") || (searchData && searchData.name === "tomato")) {
+                localStorage.removeItem("searchProduct");
+                const keyword = searchData.name.toLowerCase();
+                let found = false;
+                for (let key in products) {
+                    const product = products[key];
+                    if (product.name.toLowerCase().includes(keyword)) {
+                        openModal(key);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    alert("No matching product found.");
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

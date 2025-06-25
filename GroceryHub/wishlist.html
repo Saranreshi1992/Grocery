@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; }
+        
+        h1 { color: green; }
+        
+        .wishlist-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: 1px solid #ccc;
+          padding: 15px;
+          margin-bottom: 10px;
+        }
+
+        .btn { padding: 5px 10px; background-color: red; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+
+<body>
+  <h1>Your Wishlist</h1>
+  <div id="wishlistList"></div>
+
+  <script>
+    function renderWishlist() {
+      const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+      const list = document.getElementById("wishlistList");
+      list.innerHTML = "";
+      wishlist.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "wishlist-item";
+        div.innerHTML = `
+            <span>${item.name} (${item.unit})</span>
+            <button class="btn" onclick="removeItem(${index})">Remove</button>
+            `;
+        list.appendChild(div);
+      });
+    }
+
+    function removeItem(index) {
+      let wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+      wishlist.splice(index, 1);
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      renderWishlist();
+    }
+
+    renderWishlist();
+      
+  </script>
+</body>
+</html>
